@@ -6,7 +6,7 @@
 
 ## <b>Project status</b>
 
-🗓️ 2021.03.09(Tue)
+🗓️ 2021.03.30(Tue)
 
 **(1) project initial setup**
 
