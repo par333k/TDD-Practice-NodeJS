@@ -6,9 +6,9 @@
 
 ## <b>Project status</b>
 
-🗓️ 2021.03.30(Tue)
+**(1) <ins>project initial setup</ins>**
 
-**(1) project initial setup**
+- 🗓️ **2021.03.30(Tue)**
 
 - **Issue1) package.json 및 server.js 파일 생성하기**
 
@@ -28,7 +28,9 @@
 
   - **(5) supertest :** 통합 테스트를 위한 모듈
 
-- **Issue2) route 및 controller 생성하기**
+- 🗓️ **2021.03.31(Wed)**
+
+- **Issue2) <ins>route 및 controller 생성하기</ins>**
 
   → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/2](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/2)
 
@@ -39,3 +41,57 @@
 - **Issue4) Mongoose Model 및 Schema 생성하기**
 
   → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/4](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/4)
+
+**(2) write unit test**
+
+- **Issue9) write UT(Unit Test) for CREATE**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/9](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/9)
+
+- **Issue10) write UT(Unit Test) for CREATE Error handling**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/10](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/10)
+
+- **Issue11) write IT(Integration Test) for CREATE**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/11](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/11)
+
+- 🗓️ **2021.04.01(Thu)**
+
+- **Issue12) write UT(Unit Test) for READ (1)**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/12](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/12)
+
+- **Issue13) write UT(Unit Test) for READ Error handling (1)**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/13](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/13)
+
+- **Issue14) write IT(Integration Test) for READ (1)**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/14](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/14)
+
+- **Issue15) write UT(Unit Test) for READ (2)**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/15](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/15)
+
+- **Issue16) write IT(Integration Test) for READ (2)**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/16](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/16)
+
+- 🗓️ **2021.04.02(Fri)**
+
+- **Issue17) write UT(Unit Test) for UPDATE**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/17](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/17)
+
+- **Issue18) write IT(Integration Test) for UPDATE**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/18](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/18)
+
+- **Issue19) write UT(Unit Test) for DELETE**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/19](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/19)
+
+- **Issue20) write IT(Integration Test) for DELETE**
+
+  → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/20](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/20)
