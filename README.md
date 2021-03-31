@@ -42,7 +42,7 @@
 
   → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/4](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/4)
 
-**(2) write unit test**
+**(2) write UT(Unit Test) code / IT(Integration Test) code**
 
 - **Issue9) write UT(Unit Test) for CREATE**
 
