@@ -44,5 +44,16 @@ describe('Product Controller Create', () => {
         productController.createProduct(req, res, next);
         expect(res.statusCode).toBe(201);
         expect(res._isEndCalled()).toBeTruthy();
-    })
+    });
+    test('should return json body in response', () => {
+        // mock 함수로 선언한 create 함수의 반환값을 mockReturnValue를 통해
+        // 새로 추가한 product의 json 데이터를 반환하도록 지정한다.
+        productModel.create.mockReturnValue(newProduct);
+        // productController의 createProduct function의 인수로 
+        // mock request, response, next의 값을 넣어서 호출한다.
+        productController.createProduct(req, res, next);
+        // 호출한 결과, response 객체에 json data가 지정한 json 데이터 반환값과
+        // 일치하는지 확인을 한다.
+        expect(res._getJSONData()).toStrictEqual(newProduct);
+    });
 });
