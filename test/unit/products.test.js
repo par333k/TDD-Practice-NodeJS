@@ -43,5 +43,6 @@ describe('Product Controller Create', () => {
     test('should return 201 response code', () => {
         productController.createProduct(req, res, next);
         expect(res.statusCode).toBe(201);
+        expect(res._isEndCalled()).toBeTruthy();
     })
 });
