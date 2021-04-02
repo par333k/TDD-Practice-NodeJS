@@ -14,17 +14,25 @@ const newProduct = require('../data/new-product.json');
 // 호출이 되었는지 안되었는지 spy해서 추적할 수 있다.
 productModel.create = jest.fn();
 
+let req, res, next;
+
+// test case들의 공통된 부분을 선언해준다.
+beforeEach(() => {
+    req = httpMocks.createRequest();
+    res = httpMocks.createResponse();
+    next = null;
+});
+
 describe('Product Controller Create', () => {
+    // product data를 데이터베이스에 추가할때 필요한 product객체를 
+    // 넘겨받을 req 객체
+    beforeEach(() => {
+        req.body = newProduct;
+    });
     test('should have a createProduct function', () => {
         expect(typeof productController.createProduct).toBe('function');
     });
     test('Should call ProductModel.create', () => {
-        // product data를 데이터베이스에 추가할때 필요한 product객체를 
-        // 넘겨받을 req 객체
-        let req = httpMocks.createRequest();
-        let res = httpMocks.createResponse();
-        let next = null;
-        req.body = newProduct;
         // createProduct() 함수가 호출이 될때,
         // 위에서 httpMocks로 생성해준 req, res, next를 인수로 넘겨서
         // createProduct함수를 호출해준다. 
@@ -32,4 +40,8 @@ describe('Product Controller Create', () => {
         // productModel의 create 메소드가 같이 호출되는지 확인
         expect(productModel.create).toBeCalledWith(newProduct);
     });
+    test('should return 201 response code', () => {
+        productController.createProduct(req, res, next);
+        expect(res.statusCode).toBe(201);
+    })
 });
