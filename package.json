@@ -4,6 +4,7 @@
     "description": "![](/imgs/nodejs-tdd-img.jpeg)",
     "main": "server.js",
     "scripts": {
+        "start": "node server.js",
         "test": "jest"
     },
     "repository": {
