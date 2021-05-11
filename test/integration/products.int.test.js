@@ -2,6 +2,7 @@ const request = require('supertest');
 const app = require('../../server');
 const newProduct = require('../data/new-product.json');
 
+let firstProduct;
 test('POST /api/products', async() => {
     const response = await request(app)
         .post('/api/products')
@@ -29,4 +30,18 @@ test('GET /api/products', async() => {
     // 배열의 첫번째 요소의 name 속성이 정의가 되어있는지 확인
     expect(response.body[0].name).toBeDefined();
     expect(response.body[0].description).toBeDefined();
+    firstProduct = response.body[0];
+});
+
+test('GET /api/product/:productId', async() => {
+    const response = await request(app)
+        .get(`/api/products/${firstProduct._id}`)
+    expect(response.statusCode).toBe(200);
+    expect(response.body.name).toBe(firstProduct.name);
+    expect(response.body.description).toBe(firstProduct.description);
+});
+
+test('GET id doesnt exist /api/products/:productId', async() => {
+    const response = await request(app).get('/api/products/609a2e5933b8440ef29a8eab');
+    expect(response.statusCode).toBe(404);
 });
