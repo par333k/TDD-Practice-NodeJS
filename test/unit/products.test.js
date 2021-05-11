@@ -237,5 +237,5 @@ describe('Product controller delete', () => {
         productModel.findByIdAndDelete.mockReturnValue(rejectedPromise);
         await productController.deleteProduct(req, res, next);
         expect(next).toHaveBeenCalledWith(errorMessage);
-    })
+    });
 });
