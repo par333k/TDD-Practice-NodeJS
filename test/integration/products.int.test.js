@@ -20,3 +20,13 @@ test('should return 500 on POST /api/products', async() => {
     expect(response.statusCode).toBe(500);
     expect(response.body).toStrictEqual({ message: "Product validation failed: description: Path `description` is required." })
 });
+
+test('GET /api/products', async() => {
+    const response = await request(app).get('/api/products');
+    expect(response.statusCode).toBe(200);
+    // response.body로 넘겨받은 데이터가 배열 데이터인지 확인
+    expect(Array.isArray(response.body)).toBeTruthy();
+    // 배열의 첫번째 요소의 name 속성이 정의가 되어있는지 확인
+    expect(response.body[0].name).toBeDefined();
+    expect(response.body[0].description).toBeDefined();
+});
