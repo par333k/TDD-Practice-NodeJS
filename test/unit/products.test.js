@@ -99,4 +99,15 @@ describe('Product Controller Get', () => {
         await productController.getProducts(req, res, next);
         expect(res._getJSONData()).toStrictEqual(allProducts);
     });
+    test('should handle errors', async() => {
+        const errorMessage = { message: "Error finding product data" };
+        const rejectedPromise = Promise.reject(errorMessage);
+        // find 함수로 호출시에 반환되는 결과값을 에러 메시지로 설정
+        productModel.find.mockReturnValue(rejectedPromise);
+        // MongoDB에서 데이터를 읽어오는 처리가 있는 controller function 호출
+        await productController.getProducts(req, res, next);
+        // next를 통해 에러가 전달되기 때문에 위에서 임의로 정의한 에러 메시지와 함께 
+        // 정상적으로 next가 호출이 되는지 확인한다.
+        expect(next).toHaveBeenCalledWith(errorMessage);
+    });
 });
