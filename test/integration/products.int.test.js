@@ -30,6 +30,7 @@ test('GET /api/products', async() => {
     // 배열의 첫번째 요소의 name 속성이 정의가 되어있는지 확인
     expect(response.body[0].name).toBeDefined();
     expect(response.body[0].description).toBeDefined();
+    // 아래의 테스트 케이스에서 사용할 product 객체 초기화
     firstProduct = response.body[0];
 });
 
@@ -45,3 +46,13 @@ test('GET id doesnt exist /api/products/:productId', async() => {
     const response = await request(app).get('/api/products/609a2e5933b8440ef29a8eab');
     expect(response.statusCode).toBe(404);
 });
+
+// update시 통합 테스트
+test('PUT /api/products', async() => {
+    const res = await request(app)
+        .put(`/api/products/${firstProduct._id}`)
+        .send({ name: 'updated name', description: 'updated description' });
+    expect(res.statusCode).toBe(200);
+    expect(res.body.name).toBe('updated name');
+    expect(res.body.description).toBe('updated description');
+})
