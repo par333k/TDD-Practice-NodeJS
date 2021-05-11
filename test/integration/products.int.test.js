@@ -55,4 +55,12 @@ test('PUT /api/products', async() => {
     expect(res.statusCode).toBe(200);
     expect(res.body.name).toBe('updated name');
     expect(res.body.description).toBe('updated description');
-})
+});
+
+// update시에 에러가 발생하는 경우의 통합 테스트
+test('Should return 404 on PUT /api/products', async() => {
+    const res = await request(app)
+        .put("/api/products" + "609a9ea141bdf69a851ba71a")
+        .send({ name: 'updated name', description: 'updated description' })
+    expect(res.statusCode).toBe(404);
+});
