@@ -16,6 +16,9 @@ const allProducts = require('../data/all-products.json');
 // 호출이 되었는지 안되었는지 spy해서 추적할 수 있다.
 productModel.create = jest.fn();
 productModel.find = jest.fn();
+productModel.findById = jest.fn();
+
+const productId = "609a253133b8440ef29a8ea7";
 
 let req, res, next;
 
@@ -108,6 +111,41 @@ describe('Product Controller Get', () => {
         await productController.getProducts(req, res, next);
         // next를 통해 에러가 전달되기 때문에 위에서 임의로 정의한 에러 메시지와 함께 
         // 정상적으로 next가 호출이 되는지 확인한다.
+        expect(next).toHaveBeenCalledWith(errorMessage);
+    });
+});
+
+
+describe('Product controller GetById', () => {
+    test('should have a getProductById', () => {
+        expect(typeof productController.getProductById).toBe('function');
+    });
+    test('should call productMode.findById', async() => {
+        req.params.productId = productId;
+        await productController.getProductById(req, res, next);
+        expect(productModel.findById).toBeCalledWith(productId);
+    });
+    test('should return json body and response code 200', async() => {
+        productModel.findById.mockReturnValue(newProduct);
+        await productController.getProductById(req, res, next);
+        expect(res.statusCode).toBe(200);
+        expect(res._getJSONData()).toStrictEqual(newProduct);
+        expect(res._isEndCalled()).toBeTruthy();
+    });
+
+    // 404 (존재하는 데이터가 없는 경우)
+    test('should return 404 when item dosent exist', async() => {
+        productModel.findById.mockReturnValue(null);
+        await productController.getProductById(req, res, next);
+        expect(res.statusCode).toBe(404);
+        expect(res._isEndCalled()).toBeTruthy();
+
+    });
+    test('should handle errors', async() => {
+        const errorMessage = { message: 'error' };
+        const rejectedPromise = Promise.reject(errorMessage);
+        productModel.findById.mockReturnValue(rejectedPromise);
+        await productController.getProductById(req, res, next);
         expect(next).toHaveBeenCalledWith(errorMessage);
     });
 });
