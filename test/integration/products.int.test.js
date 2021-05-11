@@ -64,3 +64,18 @@ test('Should return 404 on PUT /api/products', async() => {
         .send({ name: 'updated name', description: 'updated description' })
     expect(res.statusCode).toBe(404);
 });
+
+test('DELETE /api/products', async() => {
+    const res = await request(app)
+        .delete(`/api/products/${firstProduct._id}`)
+        .send();
+    expect(res.statusCode).toBe(200);
+});
+
+test('DELETE id doesnt exist /api/products/:productId', async() => {
+    const res = await request(app)
+        .delete("/api/products/" + firstProduct._id)
+        .send();
+    expect(res.statusCode).toBe(404);
+
+});

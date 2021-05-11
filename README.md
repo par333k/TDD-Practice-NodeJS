@@ -54,6 +54,8 @@
 
   → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/10](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/10)
 
+- 🗓️ **2021.05.11(Tue)**
+
 - **Issue11) write IT(Integration Test) for CREATE**
 
   → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/11](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/11)
@@ -77,6 +79,8 @@
 - **Issue16) write IT(Integration Test) for READ (2)**
 
   → [https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/16](https://github.com/LeeHyungi0622/TDD-Practice-NodeJS/issues/16)
+
+- 🗓️ **2021.05.12(Wed)**
 
 - **Issue17) write UT(Unit Test) for UPDATE**
 
