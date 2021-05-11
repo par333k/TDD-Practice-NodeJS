@@ -16,6 +16,9 @@ const allProducts = require('../data/all-products.json');
 // 호출이 되었는지 안되었는지 spy해서 추적할 수 있다.
 productModel.create = jest.fn();
 productModel.find = jest.fn();
+productModel.findById = jest.fn();
+
+const productId = "609a253133b8440ef29a8ea7";
 
 let req, res, next;
 
@@ -109,5 +112,17 @@ describe('Product Controller Get', () => {
         // next를 통해 에러가 전달되기 때문에 위에서 임의로 정의한 에러 메시지와 함께 
         // 정상적으로 next가 호출이 되는지 확인한다.
         expect(next).toHaveBeenCalledWith(errorMessage);
+    });
+});
+
+
+describe('Product controller GetById', () => {
+    test('should have a getProductById', () => {
+        expect(typeof productController.getProductById).toBe('function');
+    });
+    test('should call productMode.findById', async() => {
+        req.params.productId = productId;
+        await productController.getProductById(req, res, next);
+        expect(productModel.findById).toBeCalledWith(productId);
     });
 });
