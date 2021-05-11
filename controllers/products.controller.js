@@ -40,9 +40,20 @@ exports.getProductById = async(req, res, next) => {
     }
 };
 
+// { new: true}는 업데이트된 객체의 값이 반환될 수 있도록 하는 옵션(default는 false로 설정되어있다.)
 exports.updateProduct = async(req, res, next) => {
-    await productModel.findByIdAndUpdate(
-        req.params.productId,
-        req.body, { new: true }
-    );
+    try {
+        let updatedProduct = await productModel.findByIdAndUpdate(
+            req.params.productId,
+            req.body, { new: true }
+        );
+        if (updatedProduct) {
+            res.status(200).json(updatedProduct);
+        } else {
+            // res._isEndCalled()가 toBeTruthy()이기 때문에
+            res.status(404).send();
+        }
+    } catch (error) {
+        next(error);
+    }
 };
