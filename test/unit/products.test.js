@@ -6,6 +6,8 @@ const productModel = require('../../models/Product');
 const httpMocks = require('node-mocks-http');
 // req.body에 추가해줄 newProduct json 데이터
 const newProduct = require('../data/new-product.json');
+// find test
+const allProducts = require('../data/all-products.json');
 
 // 단위 테스트이기 때문에 model에 직접적으로 영향을 받으면 안된다.(mock 함수 사용)
 // mock 함수를 사용해서 호출되는 함수를 정의해주면, 
@@ -13,6 +15,7 @@ const newProduct = require('../data/new-product.json');
 // 아래에서 productController.createProduct()가 호출되었을때, productModel.create가
 // 호출이 되었는지 안되었는지 spy해서 추적할 수 있다.
 productModel.create = jest.fn();
+productModel.find = jest.fn();
 
 let req, res, next;
 
@@ -72,5 +75,28 @@ describe('Product Controller Create', () => {
         productModel.create.mockReturnValue(rejectedPromise);
         await productController.createProduct(req, res, next);
         expect(next).toBeCalledWith(errorMessage);
+    });
+});
+
+
+describe('Product Controller Get', () => {
+    test('should have a getProducts function', () => {
+        expect(typeof productController.getProducts).toBe("function");
+    });
+    // 모든 값을 조건 없이 가져오는 것을 테스트
+    test('should call ProductModel.find({})', async() => {
+        await productController.getProducts(req, res, next);
+        expect(productModel.find).toHaveBeenCalledWith({});
+    });
+    test('should return 200 response', async() => {
+        await productController.getProducts(req, res, next);
+        expect(res.statusCode).toBe(200);
+        expect(res._isEndCalled).toBeTruthy();
+    });
+    test('should return json body in response', async() => {
+        // 독립적으로 MongoDB에 종속되지 않고, 임의로 결과값을 만들어줘야 한다.
+        productModel.find.mockReturnValue(allProducts);
+        await productController.getProducts(req, res, next);
+        expect(res._getJSONData()).toStrictEqual(allProducts);
     });
 });
