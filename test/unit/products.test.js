@@ -168,4 +168,33 @@ describe('Product Controller Update', () => {
             productId, updatedProduct, { new: true }
         );
     });
+    test('should return json body and response code 200', async() => {
+        req.params.productId = productId;
+        req.body = updatedProduct;
+        productModel.findByIdAndUpdate.mockReturnValue(updatedProduct);
+        // 실제 메서드 실행
+        await productController.updateProduct(req, res, next);
+        expect(res._isEndCalled()).toBeTruthy();
+        expect(res.statusCode).toBe(200);
+        expect(res._getJSONData()).toStrictEqual(updatedProduct);
+    });
+
+    // update 하려는 객체의 id가 존재하지 않은 경우, 
+    test('should handle 404 when item doesnt exist', async() => {
+        // 업데이트하려는 객체가 존재하지 않기 때문에 반환값을 null로 설정
+        productModel.findByIdAndUpdate.mockReturnValue(null);
+        await productController.updateProduct(req, res, next);
+        expect(res.statusCode).toBe(404);
+        expect(res._isEndCalled()).toBeTruthy();
+    })
+
+    // 데이터를 업데이트할때 에러가 발생하는 경우
+    test('should handle errors', async() => {
+        const errorMessage = { message: "Error" };
+        const rejectPromise = Promise.reject(errorMessage);
+        // Promise.reject()를 반환값으로 설정했기 때문에 catch 구문으로 처리가 된다.
+        productModel.findByIdAndUpdate.mockReturnValue(rejectPromise);
+        await productController.updateProduct(req, res, next);
+        expect(next).toHaveBeenCalledWith(errorMessage);
+    });
 });
