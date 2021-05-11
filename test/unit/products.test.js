@@ -14,11 +14,14 @@ const allProducts = require('../data/all-products.json');
 // 어떤 것에 의해서 호출되는지, 어떤 것과 함께 호출이 되는지 알 수 있다.
 // 아래에서 productController.createProduct()가 호출되었을때, productModel.create가
 // 호출이 되었는지 안되었는지 spy해서 추적할 수 있다.
+// function spy
 productModel.create = jest.fn();
 productModel.find = jest.fn();
 productModel.findById = jest.fn();
+productModel.findByIdAndUpdate = jest.fn();
 
-const productId = "609a253133b8440ef29a8ea7";
+const productId = "609a95d741bdf69a851ba718";
+const updatedProduct = { name: 'updated name', description: 'updated description' };
 
 let req, res, next;
 
@@ -147,5 +150,22 @@ describe('Product controller GetById', () => {
         productModel.findById.mockReturnValue(rejectedPromise);
         await productController.getProductById(req, res, next);
         expect(next).toHaveBeenCalledWith(errorMessage);
+    });
+});
+
+
+describe('Product Controller Update', () => {
+    test('should have an updateProduct function', () => {
+        expect(typeof productController.updateProduct).toBe('function');
+    });
+    test('should call productModel.findByIdAndUpdate', async() => {
+        req.params.productId = productId;
+        req.body = updatedProduct;
+        await productController.updateProduct(req, res, next);
+        // 필요한 인자로는 찾고자하는 id, 업데이트 하고자 하는 부분, 
+        // 업데이트하고 난 뒤에 업데이트된 값을 반환되도록 설정({new: true})
+        expect(productModel.findByIdAndUpdate).toHaveBeenCalledWith(
+            productId, updatedProduct, { new: true }
+        );
     });
 });
