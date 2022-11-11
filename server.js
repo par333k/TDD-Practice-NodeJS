@@ -4,6 +4,10 @@ const globalRoutes = require('./routes/global.route');
 const mongoose = require('mongoose');
 
 // mongoose를 사용해서 nodejs와 mongodb를 연결
+// database에 접속하는 ID와 패스워드를 테스트에서도 이렇게 노출하시면 안됩니다.
+// 클라우드 계정이기 때문에 누군가 악의를 갖고 접근한다면 문제가 될 수 있으며
+// 실제 프로덕션 환경에서는 이러한 키가 노출될 경우 해당 커밋내역 전체를 삭제해야 하는 불편함이 있습니다.
+// 아시겠지만 dotenv 를 사용하여 env 변수로 지정하시는 편이 좋습니다. 
 mongoose.connect('mongodb+srv://hyungilee:1q2w3e4r@cluster1.jgpwl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
         // 경고문구가 뜨지 않게 하기 위해서 아래 useNewUrlParser를 true로 설정
         useNewUrlParser: true,
